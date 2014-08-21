@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <title>ArangoDB in your browser</title>
+    <meta charset="utf-8"/>
+  </head>
+  <body>
+    <div id="test"></div>
+    <!-- Note: Exports global arango -->
+    <script src="/arango-0.4.4-min.js"></script>
+    <script>
+    var elem = document.getElementById('test');
+    var db = new arango.Connection("http://localhost:18529/"); // note the 1
+    // if you were browsing from a system linked to your container this would work!
+    //var db = new arango.Connection("http://arangodb:8529/");
+    db.collection.list().then(function(res) {
+        elem.innerHTML = JSON.stringify(res,undefined,2);
+      }, function(error) {
+        elem.innerHTML = JSON.stringify(error,undefined,2);
+      });
+     </script>
+</body>
+</html>
